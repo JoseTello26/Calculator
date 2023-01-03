@@ -32,7 +32,7 @@ pipeline {
 				publishHTML (target: [
 					reportDir: 'calculator/target/site',
 					reportFiles: 'checkstyle.html',
-					reportName:"JaCoCo Report"
+					reportName:"Checkstyle Report"
 				])
 			}
 		}
