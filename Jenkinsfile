@@ -26,7 +26,9 @@ pipeline {
 		}
 		stage("Static code analysis") {
 			steps {
-				sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn checkstyle:checkstyle"
+				dir("calculator"){
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn checkstyle:checkstyle"
+				}
 				publishHTML (target: [
 					reportDir: 'calculator/target/site',
 					reportFiles: 'checkstyle.html',
