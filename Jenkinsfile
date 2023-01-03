@@ -15,5 +15,14 @@ pipeline {
 				}
 			}
 		}
+		stage("Code coverage") {
+			steps {
+				publishHTML (target: [
+					reportDir: 'calculator/target/site/jacoco',
+					reportFiles: 'index.html',
+					reportName:"JaCoCo Report"
+				])
+			}
+		}
 	}
 }
