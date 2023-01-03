@@ -3,12 +3,16 @@ pipeline {
 	stages {
 		stage("Compile") {
 			steps {
-				sh "./gradlew compileJava"
+				dir("calculator"){
+					sh "JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64" mvn compile"
+				}
 			}
 		}
 		stage("Unit test") {
 			steps { 
-				sh "./gradlew test"
+				dir("calculator"){
+					JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64" mvn compile
+				}
 			}
 		}
 	}
