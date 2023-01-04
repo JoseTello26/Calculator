@@ -45,12 +45,12 @@ pipeline {
 		}
 		stage("Docker build") {
 			steps {
-				sh "docker build -t josetello26/calculator ."
+				sh "docker build -t josetello26/calculator:latest ."
 			}
 		}
 		stage("Docker push") {
 			steps {
-				sh "docker push josetello26/calculador"
+				sh "docker push josetello26/calculador:latest"
 			}
 		}
 	}
