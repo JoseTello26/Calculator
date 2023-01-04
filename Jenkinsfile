@@ -50,13 +50,13 @@ pipeline {
 		}
 		stage("Docker push") {
 			steps {
-				sh "docker tag calculador josetello26/calculador:latest"
-				sh "docker push josetello26/calculador:latest"
+				sh "docker tag calculador josetello26/calculator:latest"
+				sh "docker push josetello26/calculator:latest"
 			}
 		}
 		stage("Deploy to staging") {
 			steps {
-				sh "docker run -d --rm -p 8765:8080 --name calculator josetello26/calculador:latest"
+				sh "docker run -d --rm -p 8765:8080 --name calculator josetello26/calculator:latest"
 			}
 		}
 		stage("Acceptance test") {
