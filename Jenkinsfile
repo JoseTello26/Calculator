@@ -36,7 +36,18 @@ pipeline {
 				])
 			}
 		}
-
+		stage("Package") {
+			steps {
+				dir("calculator"){
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn package"
+				}
+			}
+		}
+		stage("Docker build") {
+			steps {
+				sh "docker build -t checha/calculator ."
+			}
+		}
 	}
 	post {
 		always {
