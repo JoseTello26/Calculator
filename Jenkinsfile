@@ -45,7 +45,7 @@ pipeline {
 		}
 		stage("Docker build") {
 			steps {
-				sh "docker build -t --rm josetello26/calculator:latest ."
+				sh "docker build -t josetello26/calculator:latest ."
 			}
 		}
 		stage("Docker push") {
