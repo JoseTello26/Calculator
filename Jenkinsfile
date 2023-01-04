@@ -48,6 +48,11 @@ pipeline {
 				sh "docker build -t checha/calculator ."
 			}
 		}
+		stage("Docker push") {
+			steps {
+				sh "docker push josetello26/calculador"
+			}
+		}
 	}
 	post {
 		always {
