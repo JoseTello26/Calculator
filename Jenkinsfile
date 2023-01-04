@@ -50,6 +50,7 @@ pipeline {
 		}
 		stage("Docker push") {
 			steps {
+				sh "docker image ls"
 				sh "docker push josetello26/calculador:latest"
 			}
 		}
