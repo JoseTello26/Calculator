@@ -54,12 +54,28 @@ pipeline {
 				sh "docker push josetello26/calculador:latest"
 			}
 		}
+		stage("Deploy to staging") {
+			steps {
+				sh "docker run -d --rm -p 8765:8080 --name calculador josetello26/calculator:latest"
+			}
+		}
+		stage("Acceptance test") {
+			steps {
+				sleep 60
+				sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
+			}
+		}
 	}
 	post {
 		always {
 			mail to: 'jose.tello.l@uni.pe',
 			subject:"Completed Pipeline: ${currentBuild.fullDisplayName}",
 			body:"Your build completed, please check: ${env.BUILD_URL}"
+		}
+	}
+	post {
+		always {
+			sh "docker stop calculator"
 		}
 	}
 }
