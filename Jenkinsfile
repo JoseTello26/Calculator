@@ -38,6 +38,7 @@ pipeline {
 		}
 		stage("Package") {
 			steps {
+				sh "service docker start"
 				dir("calculator"){
 					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn package"
 				}
@@ -45,7 +46,6 @@ pipeline {
 		}
 		stage("Docker build") {
 			steps {
-				sh "service docker start"
 				sh "docker build -t checha/calculator ."
 			}
 		}
