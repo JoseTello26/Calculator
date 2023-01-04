@@ -45,7 +45,7 @@ pipeline {
 		}
 		stage("Docker build") {
 			steps {
-				sh "docker build -t checha/calculator ."
+				sh "docker build -t josetello26/calculator ."
 			}
 		}
 		stage("Docker push") {
