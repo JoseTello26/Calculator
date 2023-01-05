@@ -52,7 +52,7 @@ pipeline {
 		}
 		stage("Docker push") {
 			steps {
-				sh "docker tag calculador josetello26/calculator:latest"
+				sh "docker tag calculador josetello26/calculator:${BUILD_TIMESTAMP}"
 				sh "docker push josetello26/calculator:${BUILD_TIMESTAMP}"
 			}
 		}
