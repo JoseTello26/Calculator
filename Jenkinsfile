@@ -7,16 +7,16 @@ pipeline {
 	stages {
 		stage("Compile") {
 			steps {
+				sh "whoami"
 				dir("calculator"){
-					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn compile"
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw compile"
 				}
 			}
 		}
 		stage("Unit test") {
 			steps { 
-				sh "whoami"
 				dir("calculator"){
-					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn test"
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw test"
 				}
 			}
 		}
@@ -33,7 +33,7 @@ pipeline {
 			steps {
 
 				dir("calculator"){
-					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn checkstyle:checkstyle"
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw checkstyle:checkstyle"
 				}
 				publishHTML (target: [
 					reportDir: 'calculator/target/site',
@@ -45,7 +45,7 @@ pipeline {
 		stage("Package") {
 			steps {
 				dir("calculator"){
-					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn package"
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw package"
 				}
 			}
 		}
