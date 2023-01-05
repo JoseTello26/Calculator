@@ -1,22 +1,18 @@
 pipeline {
-	agent{
-		node{
-			label 'jenkins_agent'
-		}
-	}	
+	agent any
 	stages {
 		stage("Compile") {
 			steps {
-				sh "whoami"
 				dir("calculator"){
-					sh "sudo JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw compile"
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw compile"
 				}
 			}
 		}
 		stage("Unit test") {
 			steps { 
+				sh "whoami"
 				dir("calculator"){
-					sh "sudo JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw test"
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw test"
 				}
 			}
 		}
@@ -33,7 +29,7 @@ pipeline {
 			steps {
 
 				dir("calculator"){
-					sh "sudo JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw checkstyle:checkstyle"
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw checkstyle:checkstyle"
 				}
 				publishHTML (target: [
 					reportDir: 'calculator/target/site',
@@ -45,7 +41,7 @@ pipeline {
 		stage("Package") {
 			steps {
 				dir("calculator"){
-					sh "sudo JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw package"
+					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' ./mvnw package"
 				}
 			}
 		}
