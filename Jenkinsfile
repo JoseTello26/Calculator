@@ -14,6 +14,7 @@ pipeline {
 		}
 		stage("Unit test") {
 			steps { 
+				sh "whoami"
 				dir("calculator"){
 					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn test"
 				}
@@ -30,6 +31,7 @@ pipeline {
 		}
 		stage("Static code analysis") {
 			steps {
+
 				dir("calculator"){
 					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn checkstyle:checkstyle"
 				}
