@@ -1,7 +1,7 @@
 pipeline {
 	agent{
 		node{
-			label '!principal'
+			label 'jenkins_agent'
 		}
 	}	
 	stages {
