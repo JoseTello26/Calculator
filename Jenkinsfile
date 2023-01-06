@@ -5,7 +5,7 @@ pipeline {
 			steps {
 				dir("calculator"){
 					sh "kubectl config get-contexts"
-					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn compile"
+					sh "./mvnw compile"
 				}
 			}
 		}
@@ -60,7 +60,7 @@ pipeline {
 		stage("Deploy to staging") {
 			steps {
 				sh "kubectl config use-context staging"
-				
+				sh "kubectl apply -f hazelcast.yaml"
 				sh "kubectl apply -f deployment.yaml"
 				sh "kubectl apply -f service.yaml"
 			}
