@@ -67,6 +67,11 @@ pipeline {
 				sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
 			}
 		}
+		stage("Update version") {
+			steps {
+				sh "sed -i 's/{{VERSION}}/${BUILD_TIMESTAMP}/g'deployment.yaml"
+			}
+		}
 	}
 	post {
 		always {
