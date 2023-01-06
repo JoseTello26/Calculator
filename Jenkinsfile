@@ -74,6 +74,14 @@ pipeline {
 				sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
 			}
 		}
+		stage("Release") {
+			steps {
+				sh "kubectl config use-context production"
+				sh "kubectl apply -f hazelcast.yaml"
+				sh "kubectl apply -f deployment.yaml"
+				sh "kubectl apply -f service.yaml"
+			}
+		}
 	}
 	post {
 		always {
