@@ -14,7 +14,7 @@ pipeline {
 			steps { 
 				sh "whoami"
 				dir("calculator"){
-					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn test"
+					sh "./mvnw test"
 				}
 			}
 		}
@@ -31,7 +31,7 @@ pipeline {
 			steps {
 
 				dir("calculator"){
-					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn checkstyle:checkstyle"
+					sh "./mvnw checkstyle:checkstyle"
 				}
 				publishHTML (target: [
 					reportDir: 'calculator/target/site',
@@ -43,7 +43,7 @@ pipeline {
 		stage("Package") {
 			steps {
 				dir("calculator"){
-					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn package"
+					sh "./mvnw package"
 				}
 			}
 		}
