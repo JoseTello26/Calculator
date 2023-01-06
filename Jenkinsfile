@@ -5,6 +5,7 @@ pipeline {
 			steps {
 				dir("calculator"){
 					sh "kubectl config get-contexts"
+					sh "chmod +x mvnw"
 					sh "./mvnw compile"
 				}
 			}
