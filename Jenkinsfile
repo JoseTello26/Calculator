@@ -5,7 +5,7 @@ pipeline {
 			steps {
 				dir("calculator"){
 					sh "kubectl config get-contexts"
-					sh "./mvnw compile"
+					sh "sudo ./mvnw compile"
 				}
 			}
 		}
