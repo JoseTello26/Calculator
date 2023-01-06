@@ -58,18 +58,17 @@ pipeline {
 		}
 		stage("Deploy to staging") {
 			steps {
-				sh "docker run -d --rm -p 8765:8080 --name calculator josetello26/calculator:${BUILD_TIMESTAMP}"
+				sh "kubectl config use-context staging"
+				sh "kubectl apply -f hazelcast.yaml"
+				sh "kubectl apply -f deployment.yaml"
+				sh "kubectl apply -f service.yaml"
 			}
 		}
+
 		stage("Acceptance test") {
 			steps {
 				sleep 60
 				sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
-			}
-		}
-		stage("Update version") {
-			steps {
-				sh "sed -i 's/{{VERSION}}/${BUILD_TIMESTAMP}/g'deployment.yaml"
 			}
 		}
 	}
