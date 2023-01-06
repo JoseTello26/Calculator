@@ -4,6 +4,7 @@ pipeline {
 		stage("Compile") {
 			steps {
 				dir("calculator"){
+					sh "kubectl config get-contexts"
 					sh "JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64' mvn compile"
 				}
 			}
